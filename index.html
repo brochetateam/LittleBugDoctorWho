@@ -81,7 +81,18 @@
         .card-back { transform: rotateY(180deg); background-color: #3d3d3d; background-image: radial-gradient(circle at center, var(--console-orange) 0%, var(--console-teal) 40%, #1a1a1a 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px); box-shadow: inset 0 0 100px #000; }
         .console-glow { position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(243, 156, 18, 0.7) 0%, transparent 70%); border-radius: 50%; animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
-        .answer-content { z-index: 10; padding: 1.5rem; text-shadow: 2px 2px 5px #000; }
+        .answer-content { 
+            z-index: 10; 
+            padding: 1rem; /* PUEDES AJUSTAR ESTE VALOR (el espacio interior) */
+            text-shadow: 2px 2px 5px #000; 
+            max-height: 90%; /* PUEDES AJUSTAR ESTE PORCENTAJE (el alto máximo) */
+            overflow-y: auto; /* Añade scroll si el contenido es muy largo */
+            scrollbar-width: thin;
+            scrollbar-color: var(--gallifreyan-gold) transparent;
+        }
+        .answer-content::-webkit-scrollbar { width: 5px; }
+        .answer-content::-webkit-scrollbar-track { background: transparent; }
+        .answer-content::-webkit-scrollbar-thumb { background-color: var(--gallifreyan-gold); border-radius: 20px; }
 
         .hp-bar-container { width: 100%; height: 20px; background-color: #4B5563; border: 2px solid var(--tardis-dark-blue); }
         .hp-bar-inner { height: 100%; background: linear-gradient(90deg, #d9534f, #f0ad4e, #5bc0de); transition: width 0.5s ease-in-out; }
@@ -260,6 +271,7 @@
         if (currentCardIndex >= currentDeck.length) { dungeonCleared(); return; }
         const card = currentDeck[currentCardIndex];
         dom.cardContainer.classList.remove('is-flipped');
+        dom.cardQuestion.style.display = 'block';
         dom.cardQuestion.textContent = card.q;
         let aHTML = `<p class="whovian-font mb-4 text-amber-300 font-bold text-lg">${card.a}</p>`;
         if (card.ad) { aHTML += `<p class="whovian-font text-sm text-gray-300 italic">${card.ad}</p>`; }
@@ -270,6 +282,7 @@
     function handleFlip() { 
         playSound('sonicReveal');
         dom.cardContainer.classList.add('is-flipped'); 
+        dom.cardQuestion.style.display = 'none';
         dom.flipBtn.style.display = 'none'; 
         dom.correctBtn.style.display = 'flex'; 
         dom.incorrectBtn.style.display = 'flex'; 
