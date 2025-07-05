@@ -112,7 +112,7 @@
             text-align: center;
         }
         
-        #epic-ending { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--gallifreyan-gold); display: flex; justify-content: center; overflow: hidden; z-index: 200; }
+        #epic-ending { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--gallifreyan-gold); display: flex; justify-content: center; align-items: flex-end; padding-bottom: 6rem; overflow: hidden; z-index: 200; }
         .credits-content { position: absolute; top: 100%; width: 80%; max-width: 600px; text-align: center; animation: scroll-up 40s linear 1s forwards; }
         @keyframes scroll-up { from { top: 100%; } to { top: -150%; } }
         
@@ -206,7 +206,7 @@
         <div class="credits-content whovian-font">
             <h2 class="text-amber-300">TIME LORD VICTORIOUS</h2><p>You stepped out of the TARDIS, a simple human...</p><p>You faced down the Daleks without blinking (that's for the Angels).</p><p>You survived the cold logic of the Cybermen.</p><p>You danced with the Master and didn't miss a beat.</p><p>You even told Davros "no".</p><p>The entire universe sings your name.</p><div class="perk-list"><p>THE SKILLS YOU FORGED IN THE VORTEX:</p><div id="final-perks-list"></div></div><p>Your knowledge is vast. Your heart (or hearts) is brave.</p><p>Your ability to rock a trench coat is legendary.</p><p>You saved all of reality. You are free.</p><p class="mt-12 text-2xl text-white">BUT ONE QUESTION REMAINS...</p><p class="mt-8 text-3xl text-blue-400">WHERE ARE YOU GOING NEXT?</p>
         </div>
-        <button id="restart-from-end" class="whovian-font pixel-border bg-green-500 text-white px-8 py-4">ONCE MORE, INTO THE BREACH</button>
+        <button id="restart-from-end" class="whovian-font pixel-border-blue bg-blue-600 text-white px-6 py-3 transition-all btn-hover-blue w-56 flex items-center justify-center text-base"><i class="fas fa-sync-alt mr-2"></i> ONCE MORE, INTO THE BREACH</button>
     </div>
 
     <script>
