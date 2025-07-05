@@ -78,9 +78,15 @@
         .pull-sign { width: 50px; height: 60px; background: #eee; border: 1px solid #333; font-size: 3px; text-align: center; padding: 2px; color: #000; font-family: 'Times New Roman', serif; line-height: 1.2; }
         
         /* THE CONSOLE ROOM - BACK FACE */
-        .card-back { transform: rotateY(180deg); background-color: #3d3d3d; background-image: radial-gradient(circle at center, var(--console-orange) 0%, var(--console-teal) 40%, #1a1a1a 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px); box-shadow: inset 0 0 100px #000; }
-        .console-glow { position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(243, 156, 18, 0.7) 0%, transparent 70%); border-radius: 50%; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: var(--tardis-blue);
+            border: 10px solid var(--tardis-dark-blue);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .answer-content { 
             z-index: 10; 
             padding: 1rem; /* PUEDES AJUSTAR ESTE VALOR (el espacio interior) */
@@ -99,6 +105,12 @@
         
         .modal { transition: all 0.3s ease; opacity: 0; visibility: hidden; transform: scale(0.8); z-index: 150; }
         .modal.active { opacity: 1; visibility: visible; transform: scale(1); }
+
+        /* Fix for Sonic Upgrade icons alignment */
+        #perks-display > i {
+            width: 22px; /* Ensures all icons occupy the same space */
+            text-align: center;
+        }
         
         #epic-ending { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--gallifreyan-gold); display: flex; justify-content: center; overflow: hidden; z-index: 200; }
         .credits-content { position: absolute; top: 100%; width: 80%; max-width: 600px; text-align: center; animation: scroll-up 40s linear 1s forwards; }
@@ -153,12 +165,19 @@
                         </div>
                     </div>
                     <div class="card-face card-back">
-                        <div class="console-glow"></div>
                         <div id="card-answer" class="answer-content text-center text-base"></div>
                     </div>
                 </div>
             </div>
-            <div id="button-container" class="flex justify-center mt-4 gap-4 flex-wrap"><button id="flip-btn" class="pixel-border-blue bg-blue-600 text-white px-6 py-3 transition-all btn-hover-blue w-56 flex items-center justify-center text-base"><i class="fa-solid fa-screwdriver mr-2"></i> REVEAL</button><button id="correct-btn" class="hidden pixel-border bg-green-500 text-white px-6 py-3 transition-all btn-hover w-48 flex items-center justify-center text-base"><i class="fas fa-check mr-2"></i> BRILLIANT!</button><button id="incorrect-btn" class="hidden pixel-border-red bg-red-500 text-white px-6 py-3 transition-all btn-hover-red w-48 flex items-center justify-center text-base"><i class="fas fa-times mr-2"></i> SPOILERS!</button></div>
+            <div id="button-container" class="h-16 mt-4">
+                <div id="flip-container" class="flex justify-center w-full">
+                    <button id="flip-btn" class="pixel-border-blue bg-blue-600 text-white px-6 py-3 transition-all btn-hover-blue w-56 flex items-center justify-center text-base"><i class="fa-solid fa-screwdriver mr-2"></i> REVEAL</button>
+                </div>
+                <div id="answer-buttons" class="hidden justify-center w-full gap-2 px-4 sm:gap-4 sm:px-0">
+                    <button id="correct-btn" class="pixel-border bg-green-500 text-white px-4 py-2 transition-all btn-hover flex-1 sm:flex-none sm:w-48 sm:px-6 sm:py-3 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-check mr-2"></i> BRILLIANT!</button>
+                    <button id="incorrect-btn" class="pixel-border-red bg-red-500 text-white px-4 py-2 transition-all btn-hover-red flex-1 sm:flex-none sm:w-48 sm:px-6 sm:py-3 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-times mr-2"></i> SPOILERS!</button>
+                </div>
+            </div>
         </main>
         
         <footer class="gallifreyan-border p-4 border-t-4">
@@ -276,16 +295,16 @@
         let aHTML = `<p class="whovian-font mb-4 text-amber-300 font-bold text-lg">${card.a}</p>`;
         if (card.ad) { aHTML += `<p class="whovian-font text-sm text-gray-300 italic">${card.ad}</p>`; }
         dom.cardAnswer.innerHTML = aHTML;
-        dom.flipBtn.style.display = 'flex'; dom.correctBtn.style.display = 'none'; dom.incorrectBtn.style.display = 'none';
+        dom.flipBtn.parentElement.style.display = 'flex';
+        dom.correctBtn.parentElement.style.display = 'none';
     }
 
     function handleFlip() { 
         playSound('sonicReveal');
         dom.cardContainer.classList.add('is-flipped'); 
         dom.cardQuestion.style.display = 'none';
-        dom.flipBtn.style.display = 'none'; 
-        dom.correctBtn.style.display = 'flex'; 
-        dom.incorrectBtn.style.display = 'flex'; 
+        dom.flipBtn.parentElement.style.display = 'none'; 
+        dom.correctBtn.parentElement.style.display = 'flex'; 
     }
 
     function handleAnswer(isCorrect) {
