@@ -1,158 +1,226 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Who: Timey-Wimey Roguelite</title>
+    <title>The Tenth Doctor's Timey-Wimey Trivia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        .whovian-font { font-family: 'Exo 2', sans-serif; }
-        .pixel-border { border: 4px solid #FBBF24; box-shadow: 5px 5px 0 #B45309; }
-        .pixel-border-red { border: 4px solid #E94560; box-shadow: 5px 5px 0 #a32e43; }
-        .pixel-border-blue { border: 4px solid #005A9C; box-shadow: 5px 5px 0 #003B6F; }
-        .pixel-border-gold { border: 4px solid #FBBF24; box-shadow: 5px 5px 0 #B45309; }
-        .btn-hover:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #B45309; }
-        .btn-hover-red:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #a32e43; }
-        .btn-hover-blue:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #003B6F; }
+        :root {
+            --tardis-blue: #003B6F;
+            --tardis-dark-blue: #002A4F;
+            --gallifreyan-gold: #D4AF37;
+            --console-orange: #F39C12;
+            --console-teal: #008080;
+        }
 
-        @keyframes vortex-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .whovian-font { font-family: 'Exo 2', sans-serif; }
+
+        @keyframes time-vortex {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         body {
-            background-color: #001f3f;
-            background: linear-gradient(rgba(0, 31, 63, 0.9), rgba(0, 0, 0, 1)), 
-                        radial-gradient(ellipse at center, rgba(0, 90, 156, 0.5) 0%, transparent 70%),
-                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80"%3E%3Crect fill="%23001f3f" width="80" height="80"%3E%3C/rect%3E%3Cg fill-opacity="0.1"%3E%3Ccircle fill="%23005A9C" cx="40" cy="40" r="60"%3E%3C/circle%3E%3Ccircle fill="%231a4a75" cx="40" cy="40" r="50"%3E%3C/circle%3E%3Ccircle fill="%232c5f90" cx="40" cy="40" r="40"%3E%3C/circle%3E%3Ccircle fill="%234575ab" cx="40" cy="40" r="30"%3E%3C/circle%3E%3Ccircle fill="%235f8bc6" cx="40" cy="40" r="20"%3E%3C/circle%3E%3Ccircle fill="%2379a2e0" cx="40" cy="40" r="10"%3E%3C/circle%3E%3C/g%3E%3C/svg%3E');
-            background-size: auto, cover, 80px 80px;
-            animation: vortex-animation 60s ease infinite;
+            background-color: #000;
+            background-image: 
+                radial-gradient(ellipse at center, rgba(0, 59, 111, 0.5) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23003B6F' /%3E%3Cstop offset='100%25' stop-color='%23008080' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E");
+            background-size: cover;
             position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.2) 0deg 1deg, transparent 1deg 60deg);
+            animation: time-vortex 60s linear infinite;
+            z-index: -1;
+        }
+        body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; box-shadow: inset 0 0 150px rgba(0,0,0,0.85); z-index: 100; }
+        
+        .gallifreyan-border {
+             background-color: rgba(0, 0, 0, 0.7);
+             backdrop-filter: blur(5px);
+             border-color: var(--tardis-blue);
+             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        body::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; box-shadow: inset 0 0 150px rgba(0,0,0,0.75); z-index: 100; }
-        body::-webkit-scrollbar { display: none; }
-        body { -ms-overflow-style: none; scrollbar-width: none; }
+        .pixel-border { border: 4px solid var(--gallifreyan-gold); box-shadow: 5px 5px 0 #8c7324; }
+        .pixel-border-red { border: 4px solid #E94560; box-shadow: 5px 5px 0 #a32e43; }
+        .pixel-border-blue { border: 4px solid var(--tardis-blue); box-shadow: 5px 5px 0 var(--tardis-dark-blue); }
+        .btn-hover:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #8c7324; }
+        .btn-hover-red:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 #a32e43; }
+        .btn-hover-blue:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--tardis-dark-blue); }
 
-        .screen-shake { animation: shake 0.4s, flashRed 0.4s; }
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-        @keyframes flashRed {
-            0%, 100% { box-shadow: inset 0 0 150px rgba(0,0,0,0.75); }
-            50% { box-shadow: inset 0 0 150px rgba(0,0,0,0.75), 0 0 100px rgba(255, 0, 0, 0.8); }
-        }
-
-        .card-container { perspective: 1000px; }
-        .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-container { perspective: 1500px; }
+        .card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
         .card-container.is-flipped .card-inner { transform: rotateY(180deg); }
-        .card-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1.5rem; }
-        .card-back { transform: rotateY(180deg); }
-        .hp-bar-container { width: 100%; height: 20px; background-color: #4B5563; border: 2px solid #1F2937; }
-        .hp-bar-inner { height: 100%; background: linear-gradient(90deg, #005A9C, #3B82F6); transition: width 0.5s ease-in-out; }
+        .card-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
+        /* THE CSS TARDIS - FRONT FACE */
+        .tardis-front { background: transparent; display: flex; justify-content: center; align-items: center; }
+        .tardis-box { position: relative; width: 160px; height: 280px; background: var(--tardis-blue); border: 10px solid var(--tardis-dark-blue); box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 5px 5px 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; }
+        .tardis-roof { position: absolute; top: -20px; width: 180px; height: 10px; background: var(--tardis-dark-blue); }
+        .tardis-roof::before { content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 20px; height: 15px; background: #fff; border-radius: 3px 3px 0 0; box-shadow: 0 -5px 10px #fff; }
+        .police-box-sign { position: absolute; top: 10px; width: 140px; background: black; color: white; text-align: center; font-family: sans-serif; font-size: 8px; padding: 3px 0; letter-spacing: 1px; border: 1px solid white; }
+        .tardis-door { display: flex; margin-top: 40px; }
+        .door-panel { width: 70px; height: 210px; background: var(--tardis-blue); border: 2px solid var(--tardis-dark-blue); display: flex; flex-direction: column; justify-content: space-around; align-items: center; }
+        .door-panel:first-child { border-right: none; }
+        .window-pane { width: 50px; height: 50px; background: #ddd; border: 3px solid var(--tardis-dark-blue); display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; }
+        .window-pane div { background: var(--console-teal); box-shadow: inset 0 0 5px rgba(255,255,255,0.5); }
+        .door-wood-panel { width: 50px; height: 30px; background: var(--tardis-blue); border: 3px solid var(--tardis-dark-blue); box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3); }
+        .pull-sign { width: 50px; height: 60px; background: #eee; border: 1px solid #333; font-size: 3px; text-align: center; padding: 2px; color: #000; font-family: 'Times New Roman', serif; line-height: 1.2; }
+        
+        /* THE CONSOLE ROOM - BACK FACE */
+        .card-back { transform: rotateY(180deg); background-color: #3d3d3d; background-image: radial-gradient(circle at center, var(--console-orange) 0%, var(--console-teal) 40%, #1a1a1a 70%), repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0, rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px); box-shadow: inset 0 0 100px #000; }
+        .console-glow { position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(243, 156, 18, 0.7) 0%, transparent 70%); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+        .answer-content { z-index: 10; padding: 1.5rem; text-shadow: 2px 2px 5px #000; }
+
+        .hp-bar-container { width: 100%; height: 20px; background-color: #4B5563; border: 2px solid var(--tardis-dark-blue); }
+        .hp-bar-inner { height: 100%; background: linear-gradient(90deg, #d9534f, #f0ad4e, #5bc0de); transition: width 0.5s ease-in-out; }
+        
         .modal { transition: all 0.3s ease; opacity: 0; visibility: hidden; transform: scale(0.8); z-index: 150; }
         .modal.active { opacity: 1; visibility: visible; transform: scale(1); }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        #epic-ending {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; color: #FBBF24; display: flex;
-            justify-content: center; overflow: hidden; z-index: 200;
-        }
-        .credits-content {
-            position: absolute; top: 100%; width: 80%; max-width: 600px;
-            text-align: center; animation: scroll-up 40s linear 1s forwards;
-        }
-        .credits-content h2 { font-size: 2em; margin-bottom: 2rem; }
-        .credits-content p { font-size: 1em; margin-bottom: 1.5rem; }
-        .credits-content .perk-list { margin-top: 3rem; margin-bottom: 3rem; }
+        
+        #epic-ending { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: var(--gallifreyan-gold); display: flex; justify-content: center; overflow: hidden; z-index: 200; }
+        .credits-content { position: absolute; top: 100%; width: 80%; max-width: 600px; text-align: center; animation: scroll-up 40s linear 1s forwards; }
         @keyframes scroll-up { from { top: 100%; } to { top: -150%; } }
-        #restart-from-end { position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%); z-index: 210; }
+        
+        /* Damage Shake */
+        .screen-shake { animation: shake 0.4s, flashRed 0.4s; }
+        @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
+        @keyframes flashRed { 0%, 100% { box-shadow: inset 0 0 150px rgba(0,0,0,0.85); } 50% { box-shadow: inset 0 0 150px rgba(0,0,0,0.85), 0 0 100px rgba(255, 0, 0, 0.8); } }
     </style>
 </head>
 <body class="whovian-font text-gray-200 h-screen flex flex-col">
-    <!-- Contenido del Juego -->
+    <!-- Game Content -->
     <div id="game-wrapper" class="flex flex-col h-full">
-        <header class="bg-black/50 p-4 border-b-4 border-blue-800 backdrop-blur-sm">
+        <header class="gallifreyan-border p-4 border-b-4">
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-2">
                 <div class="text-center md:text-left mb-4 md:mb-0">
-                    <h1 class="text-base sm:text-lg md:text-xl text-white flex items-center justify-center md:justify-start gap-2 sm:gap-4">
-                        <i class="fa-solid fa-user-astronaut text-blue-400"></i>
-                        <span>Timey-Wimey Roguelite</span>
+                    <h1 class="text-lg md:text-xl text-white flex items-center justify-center md:justify-start gap-3">
+                        <i class="fa-solid fa-user-tie text-blue-400"></i>
+                        <span>The Tenth Doctor's Trivia</span>
                     </h1>
                     <h2 id="dungeon-name" class="text-sm text-blue-300 italic"></h2>
                     <p id="dungeon-counter" class="text-xs text-gray-400"></p>
                 </div>
-                <!-- Stats -->
                 <div class="flex items-center gap-4 w-full md:w-auto">
-                    <div class="flex-grow"><span class="text-xs text-blue-300">TARDIS</span><div class="hp-bar-container pixel-border-blue bg-blue-900"><div id="hp-bar" class="hp-bar-inner"></div></div></div>
-                    <div class="p-1 sm:p-2 pixel-border-gold bg-amber-100 text-gray-800 flex items-center text-xs sm:text-base"><span class="mr-1 sm:mr-2">🌀</span><span id="contador-cartas" class="font-bold">0</span><span class="ml-1 hidden sm:inline">/ <span id="total-cartas"></span></span></div>
+                    <div class="flex-grow"><span class="text-xs text-blue-300">TARDIS Integrity</span><div class="hp-bar-container"><div id="hp-bar" class="hp-bar-inner"></div></div></div>
+                    <div class="p-2 pixel-border bg-amber-100 text-gray-800 flex items-center text-base"><span class="mr-2">🌀</span><span id="contador-cartas" class="font-bold">0</span><span class="ml-1">/ <span id="total-cartas"></span></span></div>
                 </div>
             </div>
         </header>
 
-        <main class="flex-grow container mx-auto px-2 sm:px-4 py-4 sm:py-8 flex flex-col justify-center items-center">
-            <div id="card-container" class="card-container w-full max-w-3xl h-64 sm:h-80 mb-6"><div id="card-inner" class="card-inner"><div class="card-face pixel-border-blue bg-gray-800/80 backdrop-blur-sm"><div id="card-question" class="text-center text-sm md:text-base"></div></div><div class="card-face card-back pixel-border bg-gray-800/80 backdrop-blur-sm"><div id="card-answer" class="text-center text-sm md:text-base"></div></div></div></div>
-            <div id="button-container" class="flex justify-center mt-4 sm:mt-8 gap-2 sm:gap-4 flex-wrap"><button id="flip-btn" class="pixel-border-blue bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-3 transition-all btn-hover-blue w-full sm:w-56 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-eye mr-2"></i> REVELAR</button><button id="correct-btn" class="hidden pixel-border bg-amber-500 text-black px-4 py-2 sm:px-6 sm:py-3 transition-all btn-hover w-full sm:w-48 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-check mr-2"></i> ¡BRILLANTE!</button><button id="incorrect-btn" class="hidden pixel-border-red bg-red-500 text-white px-4 py-2 sm:px-6 sm:py-3 transition-all btn-hover-red w-full sm:w-48 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-times mr-2"></i> ¡AY, CARAMBA!</button></div>
+        <main class="flex-grow container mx-auto p-4 flex flex-col justify-center items-center">
+            <div id="card-question" class="text-center text-lg max-w-3xl mb-6 text-shadow-lg shadow-black"></div>
+            <div id="card-container" class="card-container w-full max-w-xs h-96 mb-6">
+                <div id="card-inner" class="card-inner">
+                    <div class="card-face tardis-front">
+                        <div class="tardis-box">
+                            <div class="tardis-roof"></div>
+                            <div class="police-box-sign">POLICE PUBLIC CALL BOX</div>
+                            <div class="tardis-door">
+                                <div class="door-panel">
+                                    <div class="window-pane"><div></div><div></div><div></div><div></div></div>
+                                    <div class="door-wood-panel"></div>
+                                    <div class="door-wood-panel"></div>
+                                </div>
+                                <div class="door-panel">
+                                    <div class="pull-sign">PULL TO OPEN</div>
+                                    <div class="door-wood-panel"></div>
+                                    <div class="door-wood-panel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="console-glow"></div>
+                        <div id="card-answer" class="answer-content text-center text-base"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="button-container" class="flex justify-center mt-4 gap-4 flex-wrap"><button id="flip-btn" class="pixel-border-blue bg-blue-600 text-white px-6 py-3 transition-all btn-hover-blue w-56 flex items-center justify-center text-base"><i class="fa-solid fa-screwdriver mr-2"></i> REVEAL</button><button id="correct-btn" class="hidden pixel-border bg-green-500 text-white px-6 py-3 transition-all btn-hover w-48 flex items-center justify-center text-base"><i class="fas fa-check mr-2"></i> BRILLIANT!</button><button id="incorrect-btn" class="hidden pixel-border-red bg-red-500 text-white px-6 py-3 transition-all btn-hover-red w-48 flex items-center justify-center text-base"><i class="fas fa-times mr-2"></i> SPOILERS!</button></div>
         </main>
         
-        <footer class="bg-black/50 p-2 sm:p-4 border-t-4 border-blue-800 backdrop-blur-sm">
-            <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+        <footer class="gallifreyan-border p-4 border-t-4">
+             <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
                 <div class="flex items-center gap-4 mb-2 sm:mb-0 text-center">
-                     <p class="whovian-font text-white text-xs sm:text-sm"><span>SONIC:</span></p>
+                     <p class="whovian-font text-white text-sm"><span>SONIC UPGRADES:</span></p>
                     <div id="perks-display" class="flex gap-4 justify-center"></div>
-                    <button id="perks-btn" class="pixel-border-blue bg-blue-600 text-white px-3 py-1 text-xs transition-all btn-hover-blue">VER</button>
+                    <button id="perks-btn" class="pixel-border-blue bg-blue-600 text-white px-3 py-1 text-xs transition-all btn-hover-blue">VIEW</button>
                 </div>
-                <div class="flex flex-row justify-between w-full sm:w-auto gap-2 sm:gap-4">
-                    <button id="reset-btn" class="whovian-font pixel-border-red bg-red-600 text-white px-4 py-2 sm:px-6 sm:py-3 transition-all btn-hover-red flex items-center justify-center text-xs sm:text-base"><i class="fas fa-undo mr-2"></i> REGENERAR</button>
-                    <button id="reglas-btn" class="whovian-font pixel-border-gold bg-amber-600 text-white px-4 py-2 sm:px-6 sm:py-3 transition-all btn-hover flex items-center justify-center text-xs sm:text-base"><i class="fas fa-scroll mr-2"></i> GUÍA</button>
+                <div class="flex flex-row justify-between w-full sm:w-auto gap-4">
+                    <button id="reset-btn" class="whovian-font pixel-border-red bg-red-600 text-white px-6 py-3 transition-all btn-hover-red flex items-center justify-center text-base"><i class="fas fa-sync-alt mr-2"></i> REGENERATE</button>
+                    <button id="reglas-btn" class="whovian-font pixel-border bg-amber-600 text-white px-6 py-3 transition-all btn-hover flex items-center justify-center text-base"><i class="fas fa-scroll mr-2"></i> GUIDE</button>
                 </div>
             </div>
         </footer>
     </div>
 
     <!-- Modals -->
-    <div id="modal-reglas" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-gold max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-amber-400">GUÍA DEL COMPAÑERO</h2><div class="mb-4 text-white text-sm whovian-font"><p class="mb-2">1. CADA CARTA ES UNA PARADOJA. Resuélvela para estabilizar el tiempo.</p><p class="mb-2">2. FALLAR DAÑA LA TARDIS. Sé honesto, el universo no se anda con tonterías.</p><p class="mb-2">3. Si la integridad de la TARDIS llega a 0, estás perdido en el Vórtice del Tiempo. GAME OVER.</p><p class="mt-4 text-blue-300">4. El tiempo es... inestable. "Wibbly-wobbly... timey-wimey... stuff". Pueden ocurrir cosas.</p></div><button id="cerrar-reglas" class="whovian-font pixel-border bg-amber-500 text-black px-4 py-2 w-full">¡ENTENDIDO!</button></div></div>
-    <div id="modal-gameover" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-red max-w-md w-full text-center"><h2 class="whovian-font text-4xl mb-4 text-red-500">¡EXTERMINADO!</h2><i class="fas fa-robot text-6xl text-gray-500 mb-4"></i><p class="whovian-font mb-2 text-white">LA PARADOJA TE HA CONSUMIDO.</p><p class="whovian-font mb-6 text-white">PARADOJAS RESUELTAS: <strong id="final-score" class="text-yellow-400">0</strong></p><button id="restart-run-btn" class="whovian-font pixel-border bg-amber-500 text-black px-4 py-2 w-full">REINTENTAR EPISODIO</button></div></div>
-    <div id="modal-dungeon-cleared" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-gold max-w-md w-full text-center"><h2 class="whovian-font text-2xl mb-4 text-amber-300">EPISODIO COMPLETADO</h2><i class="fas fa-door-open text-6xl text-gray-300 mb-4"></i><p class="whovian-font mb-2 text-white">Has salvado el día. La TARDIS se ha reparado sola. ¡Qué lista es!</p><div id="new-perk-announcement" class="my-4 p-2 bg-blue-900 border-2 border-blue-500" style="display: none;"><p class="whovian-font text-sm text-white">¡EL DESTORNILLADOR SÓNICO SE HA ACTUALIZADO!</p><p id="new-perk-name" class="whovian-font text-blue-300"></p></div><p id="next-dungeon-lore" class="whovian-font mb-6 text-sm text-blue-200 italic"></p><button id="next-dungeon-btn" class="whovian-font pixel-border bg-blue-500 text-white px-4 py-2 w-full">¡ALLONS-Y!</button></div></div>
-    <div id="modal-event" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full text-center"><h2 id="event-title" class="whovian-font text-2xl mb-4 text-blue-400">¡ALGO VA MAL!</h2><i id="event-icon" class="text-6xl text-gray-300 mb-4"></i><p id="event-description" class="whovian-font mb-6 text-white"></p><button id="event-continue-btn" class="whovian-font pixel-border bg-amber-500 text-black px-4 py-2 w-full">CONTINUAR</button></div></div>
-    <div id="modal-perks" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">MEJORAS SÓNICAS</h2><div id="perks-list-modal" class="mb-4 text-white text-sm whovian-font space-y-4"></div><button id="cerrar-perks" class="whovian-font pixel-border bg-amber-500 text-black px-4 py-2 w-full">CERRAR</button></div></div>
+    <div id="modal-reglas" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">COMPANION'S GUIDE</h2><div class="mb-4 text-white text-sm whovian-font"><p class="mb-2">1. Each card is a paradox. Solve it to stabilize the timeline.</p><p class="mb-2">2. Failure damages the TARDIS. Be honest, the universe doesn't do second chances.</p><p class="mb-2">3. If TARDIS integrity hits 0, you're lost to the Time Vortex. Game Over.</p><p class="mt-4 text-amber-300">4. Time is... wibbly-wobbly. Unexpected things can, and will, happen.</p></div><button id="cerrar-reglas" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">Got it!</button></div></div>
+    <div id="modal-gameover" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-red max-w-md w-full text-center"><h2 class="whovian-font text-4xl mb-4 text-red-500">EXTERMINATED!</h2><i class="fas fa-robot text-6xl text-gray-500 mb-4"></i><p class="whovian-font mb-2 text-white">THE PARADOX CONSUMED YOU.</p><p class="whovian-font mb-6 text-white">PARADOXES FIXED: <strong id="final-score" class="text-yellow-400">0</strong></p><button id="restart-run-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">RETRY STORY ARC</button></div></div>
+    <div id="modal-dungeon-cleared" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border bg-amber-800 max-w-md w-full text-center"><h2 class="whovian-font text-2xl mb-4 text-amber-300">STORY ARC COMPLETE</h2><i class="fas fa-door-open text-6xl text-gray-300 mb-4"></i><p class="whovian-font mb-2 text-white">You saved the day. The TARDIS repaired itself. Clever girl.</p><div id="new-perk-announcement" class="my-4 p-2 bg-blue-900 border-2 border-blue-500" style="display: none;"><p class="whovian-font text-sm text-white">SONIC SCREWDRIVER UPGRADED!</p><p id="new-perk-name" class="whovian-font text-blue-300"></p></div><p id="next-dungeon-lore" class="whovian-font mb-6 text-sm text-blue-200 italic"></p><button id="next-dungeon-btn" class="whovian-font pixel-border-blue bg-blue-500 text-white px-4 py-2 w-full">ALLONS-Y!</button></div></div>
+    <div id="modal-event" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full text-center"><h2 id="event-title" class="whovian-font text-2xl mb-4 text-blue-400">SOMETHING'S WRONG!</h2><i id="event-icon" class="text-6xl text-gray-300 mb-4"></i><p id="event-description" class="whovian-font mb-6 text-white"></p><button id="event-continue-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CONTINUE</button></div></div>
+    <div id="modal-perks" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">SONIC UPGRADES</h2><div id="perks-list-modal" class="mb-4 text-white text-sm whovian-font space-y-4"></div><button id="cerrar-perks" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CLOSE</button></div></div>
     
-    <!-- PANTALLA DE FINAL ÉPICO -->
     <div id="epic-ending" style="display: none;">
         <div class="credits-content whovian-font">
-            <h2 class="text-amber-300">TIME LORD VICTORIOUS</h2><p>Saliste de la TARDIS, un simple humano...</p><p>Te enfrentaste a los Daleks sin pestañear (eso es para los Ángeles).</p><p>Sobreviviste a la lógica fría de los Cybermen.</p><p>Bailaste con el Maestro y no perdiste el ritmo.</p><p>Incluso le dijiste "no" a Davros.</p><p>El universo entero canta tu nombre.</p><div class="perk-list"><p>LAS HABILIDADES QUE FORJASTE EN EL VÓRTICE:</p><div id="final-perks-list"></div></div><p>Tu conocimiento es vasto. Tu corazón (o corazones) es valiente.</p><p>Tu habilidad para encontrar un fez guay es legendaria.</p><p>Has salvado toda la realidad. Eres libre.</p><p class="mt-12 text-2xl text-white">PERO QUEDA UNA PREGUNTA...</p><p class="mt-8 text-3xl text-blue-400">¿ADÓNDE VAMOS AHORA?</p>
+            <h2 class="text-amber-300">TIME LORD VICTORIOUS</h2><p>You stepped out of the TARDIS, a simple human...</p><p>You faced down the Daleks without blinking (that's for the Angels).</p><p>You survived the cold logic of the Cybermen.</p><p>You danced with the Master and didn't miss a beat.</p><p>You even told Davros "no".</p><p>The entire universe sings your name.</p><div class="perk-list"><p>THE SKILLS YOU FORGED IN THE VORTEX:</p><div id="final-perks-list"></div></div><p>Your knowledge is vast. Your heart (or hearts) is brave.</p><p>Your ability to rock a trench coat is legendary.</p><p>You saved all of reality. You are free.</p><p class="mt-12 text-2xl text-white">BUT ONE QUESTION REMAINS...</p><p class="mt-8 text-3xl text-blue-400">WHERE ARE YOU GOING NEXT?</p>
         </div>
-        <button id="restart-from-end" class="whovian-font pixel-border bg-amber-500 text-black px-8 py-4">UNA VEZ MÁS, A LA BRECHA</button>
+        <button id="restart-from-end" class="whovian-font pixel-border bg-green-500 text-white px-8 py-4">ONCE MORE, INTO THE BREACH</button>
     </div>
 
-
     <script>
-    // --- DATABASE (¡LA PARTE DIVERTIDA!) ---
-    const dungeons = [ // "Dungeons" ahora son "Episodios"
-        { name: "La Tierra: Primeras Paradas", lore: "Un tipo loco con una cabina azul. ¿Qué podría salir mal? ¡Todo!", perk: { id: "jelly_baby", name: "Jelly Baby?", icon: "fa-solid fa-candy-cane", desc: "La amabilidad es poder. Recibes 5 menos de daño al fallar." }, cards: [ { q: "¿Qué significa 'TARDIS'?", a: "Time And Relative Dimension In Space", ad: "Y sí, es más grande por dentro. Acostúmbrate." }, { q: "¿De qué planeta es originario el Doctor?", a: "Gallifrey", ad: "En la constelación de Kasterborous. Un lugar un poco estirado, la verdad." }, { q: "El archienemigo del Doctor es otro Señor del Tiempo. ¿Quién es?", a: "El Amo (The Master)", ad: "Su mejor amigo, su peor enemigo. Es complicado." }, { q: "¿Cuál es el 'slogan' del Décimo Doctor (David Tennant)?", a: "¡Allons-y!", ad: "Que significa '¡Vamos!' en francés. A veces también dice 'lo siento, lo siento mucho'." } ] },
-        { name: "Skaro: El Odio de los Daleks", lore: "La palabra clave aquí es '¡EXTERMINAR!'. Intenta no ser exterminado.", perk: { id: "reverse_polarity", name: "¡Invierte la Polaridad!", icon: "fa-solid fa-bolt", desc: "¡Un truco clásico! Una vez por episodio, si recibes un golpe fatal, sobrevives con 1 de integridad. No lo intentes dos veces." }, cards: [ { q: "¿Quién creó a los Daleks?", a: "Davros", ad: "Un científico Kaled con complejo de dios y sin silla de oficina cómoda." }, { q: "Además de las escaleras (antes), ¿cuál es la mayor debilidad de un Dalek?", a: "Su ojo. Es su único punto vulnerable.", ad: "Apuntar es difícil cuando gritan y disparan láseres, pero vale la pena intentarlo." }, { q: "¿Qué hay dentro de la carcasa de un Dalek?", a: "Una criatura mutante Kaled.", ad: "Son básicamente tanques de guerra para calamares muy, muy enfadados." }, { q: "Los Daleks no sienten emociones, excepto una. ¿Cuál?", a: "El odio.", ad: "Puro, sin adulterar, y dirigido a todo lo que no sea un Dalek." } ] },
-        { name: "Mondas: El Amanecer de los Cybermen", lore: "Serás mejorado. No te resistas. La lógica es fría y no tiene sentido del humor.", perk: { id: "emotional_inhibitor", name: "Inhibidor Emocional", icon: "fa-solid fa-face-meh", desc: "A veces, la apatía ayuda. Tienes un 15% de probabilidad de que un fallo no te afecte. '¡Excelente!'" }, cards: [ { q: "¿Cuál es el objetivo principal de los Cybermen?", a: "Mejorar/Convertir a toda la vida orgánica.", ad: "Eliminan las debilidades como las emociones, el amor y el saber cuándo parar de hablar." }, { q: "¿Cuál es su frase más famosa (y terrorífica)?", a: "\"Serás borrado\" (You will be deleted).", ad: "Es como el ctrl+alt+supr de los villanos cósmicos." }, { q: "Además del oro, ¿qué puede sobrecargar a un Cyberman?", a: "Las emociones fuertes.", ad: "Una buena dosis de amor, rabia o una paradoja lógica los deja fritos. ¡Poético!" } ] },
-        { name: "La Biblioteca: Silencio y Sombras", lore: "No parpadees. Parpadea y estás muerto. No te gires. No mires para otro lado y no parpadees. Buena suerte.", perk: { id: "quantum_lock", name: "Cierre Cuántico", icon: "fa-solid fa-hand", desc: "Tu entendimiento de la física cuántica te permite empezar cada episodio con 1 paradoja ya resuelta." }, cards: [ { q: "¿Qué son los Vashta Nerada?", a: "El polvo en los rayos de sol. Son sombras que devoran la carne.", ad: "Viven en la oscuridad. Básicamente, son la razón por la que te daba miedo la oscuridad de pequeño." }, { q: "¿Cómo se derrota a un Ángel Lloroso?", a: "No puedes. Solo puedes sobrevivir mirándolo.", ad: "En el momento en que dejas de mirarlo, se mueve. Son rápidos, más rápidos de lo que crees." }, { q: "Cuando un Ángel Lloroso te toca, ¿qué te sucede?", a: "Te envía al pasado y se alimenta de la energía de los días que no vivirás.", ad: "Es una forma educada de asesinato, pero sigues estando muerto en el presente. Un rollo." } ] },
-        { name: "El Fin del Universo: El Sonido de los Tambores", lore: "Escucha... ¿oyes eso? Es el ritmo de una mente fracturada y brillante.", perk: { id: "four_knocks", name: "Cuatro Golpes", icon: "fa-solid fa-drum", desc: "El sonido de los tambores ahora te cura 15 de integridad adicionales." }, cards: [ { q: "¿Qué arma usó el Doctor para (supuestamente) terminar la Guerra del Tiempo?", a: "El Momento.", ad: "Un arma consciente con forma de Rose Tyler. Larga historia." }, { q: "El rostro de Boe le dio al Doctor un último mensaje. ¿Cuál fue?", a: "\"No estás solo\" (You Are Not Alone - YANA)", ad: "Revelando la identidad del Profesor Yana como una versión del Amo." }, { q: "La profecía sobre la muerte del Décimo Doctor decía: \"Él tocará...", a: "...cuatro veces.\"", ad: "Y no fue el Amo, sino el bueno de Wilfred Mott, atrapado en una cabina de radiación. Desgarrador." } ] },
-        { name: "Gallifrey: La Guerra del Tiempo", lore: "Aquí se forjan leyendas y se rompen universos. Bienvenido a casa.", perk: { id: "time_lord_victorious", name: "Time Lord Victorious", icon: "fa-solid fa-crown", desc: "Has visto el Vórtice del Tiempo. Nada te asusta." }, cards: [ { q: "¿Quién fue el primer Señor del Tiempo y fundador de su sociedad?", a: "Rassilon.", ad: "Un tipo brillante, poderoso y con una preocupante falta de humildad." }, { q: "¿Cuántas regeneraciones se le permitían originalmente a un Señor del Tiempo?", a: "Doce regeneraciones (trece encarnaciones).", ad: "Una regla que el Doctor... ha 'flexibilizado' un poco gracias a sus amigos." }, { q: "¿Qué es el Cisma Eterno?", a: "Una brecha en el tejido de la realidad, el Vórtice del Tiempo, al que un antiguo Gallifreyano se asomó y se volvió loco, convirtiéndose en el Amo.", ad: "Mirar al abismo y que el abismo te devuelva la mirada y te dé un ritmo pegadizo."} ] }
+    // ===================================================================================
+    // ¡¡¡INSTRUCCIONES DE SONIDO!!!
+    // ===================================================================================
+    // Para activar los sonidos, crea una carpeta llamada 'audio' al lado de tu
+    // archivo index.html y pon dentro los siguientes archivos de sonido (mp3, wav, etc.):
+    // - tardis_start.mp3   (El sonido VWORP VWORP de la TARDIS)
+    // - sonic_reveal.mp3   (El zumbido del destornillador sónico)
+    // - correct.mp3        (Un sonido positivo, como un 'ding')
+    // - incorrect.mp3      (Un sonido de error/daño)
+    // - game_over.mp3      (¡Un "EXTERMINATE!" sería perfecto!)
+    // 
+    // Si no pones los archivos, el juego funcionará igual pero sin sonido.
+    // Puedes encontrar estos sonidos en sitios de fans de Doctor Who o en YouTube.
+    // ===================================================================================
+    const sounds = {
+        tardisStart: new Audio('audio/tardis_start.mp3'),
+        sonicReveal: new Audio('audio/sonic_reveal.mp3'),
+        correct: new Audio('audio/correct.mp3'),
+        incorrect: new Audio('audio/incorrect.mp3'),
+        gameOver: new Audio('audio/game_over.mp3')
+    };
+    Object.values(sounds).forEach(sound => sound.volume = 0.5); // Adjust volume
+    function playSound(soundName) {
+        if (sounds[soundName] && sounds[soundName].src.includes('/audio/')) {
+            sounds[soundName].currentTime = 0;
+            sounds[soundName].play().catch(e => console.log("Audio play failed. User interaction needed."));
+        }
+    }
+
+    // --- DATABASE (TENTH DOCTOR'S ERA) ---
+    const dungeons = [
+        { name: "The Christmas Invasion", lore: "A new Doctor, still in his pajamas. What could possibly go wrong? Right, the Sycorax.", perk: { id: "new_companion_armor", name: "New Companion's Plot Armor", icon: "fa-solid fa-heart", desc: "You're new to this! Take 5 less damage from failures." }, cards: [ { q: "What does the Doctor finally find in the TARDIS wardrobe that suits him?", a: "A brown pinstripe suit, and a trench coat.", ad: "And a pair of Converse. Very important, the Converse." }, { q: "How does the Doctor defeat the Sycorax leader in their sword fight?", a: "By using his breath to regrow his severed hand.", ad: "That 'new man' smell... still cooking. And a conveniently dropped satsuma." }, { q: "What is the big, red button the Sycorax threaten to use?", a: "It controls blood. Specifically, type A positive.", ad: "A very specific threat, but terrifying nonetheless." } ] },
+        { name: "The Girl in the Fireplace", lore: "Clockwork droids, a lonely girl, and a horse on a spaceship. It's a love story.", perk: { id: "timey_wimey_loophole", name: "Timey-Wimey Loophole", icon: "fa-solid fa-hourglass-half", desc: "Once per story arc, if you would be defeated, you survive with 1 Integrity instead." }, cards: [ { q: "What are the clockwork droids harvesting from the crew?", a: "Their body parts, to repair the ship.", ad: "They just needed one last part: the brain of Madame de Pompadour." }, { q: "What is the name of the spaceship?", a: "The SS Madame de Pompadour.", ad: "Named after the woman they were stalking through time. A bit creepy." }, { q: "How does the Doctor finally break the connection to Reinette's time?", a: "By shattering the time window, knowing he can never return.", ad: "He is the 'lonely angel'." } ] },
+        { name: "Blink & Utopia", lore: "Don't blink. And whatever you do, don't trust the kind old professor.", perk: { id: "psychic_paper", name: "Psychic Paper", icon: "fa-solid fa-id-card", desc: "It's blank, but they see what you want them to see. 15% chance to avoid damage on failure." }, cards: [ { q: "What is the famous warning about the Weeping Angels?", a: "'Don't blink. Blink and you're dead.'", ad: "Also don't turn your back, don't look away, and... don't blink." }, { q: "What four words does the Face of Boe tell the Doctor?", a: "'You Are Not Alone.' (YANA)", ad: "A message of hope that turns into a terrifying revelation." }, { q: "What does Professor Yana use to become The Master again?", a: "A fob watch, containing his Time Lord essence.", ad: "The drums... the never-ending drums..." } ] },
+        { name: "Journey's End", lore: "Davros is back. The Daleks have stolen 27 planets. And everyone is here.", perk: { id: "double_doctor", name: "Two Doctors?!", icon: "fa-solid fa-users", desc: "The 'Jammie Dodger' event now heals for 15 extra integrity. There's two of you to eat them!" }, cards: [ { q: "What is Davros's ultimate weapon, the 'Reality Bomb'?", a: "A wave that cancels out the electrical energy in every atom, erasing all matter.", ad: "He's not a subtle man, is he?" }, { q: "How is the 'Meta-Crisis' Doctor created?", a: "From the Doctor's own severed hand and Donna's human DNA.", ad: "Part Time Lord, part human. All the rage and fury." }, { q: "What is Donna Noble's tragic fate?", a: "She must have her memory of the Doctor completely erased to save her life.", ad: "The most important woman in the universe, who can never know it." } ] },
+        { name: "The Waters of Mars", lore: "The laws of time are his. And they will obey him. This won't end well.", perk: { id: "time_lord_victorious_hubris", name: "Time Lord Victorious", icon: "fa-solid fa-crown", desc: "You've seen the source code of the universe. You are beyond damage." }, cards: [ { q: "What is the name of the water-based virus on Mars?", a: "The Flood.", ad: "'Water is patient... water always wins.'" }, { q: "What is the 'fixed point in time' the Doctor decides to break?", a: "The destruction of Bowie Base One and the deaths of its crew.", ad: "He saves them, but changes history, with terrible consequences." }, { q: "How does Captain Adelaide Brooke defy the Doctor's new god-complex?", a: "By taking her own life, restoring the timeline.", ad: "She proves that no one, not even the Doctor, is in charge." } ] }
     ];
     const terrifyingEvents = [
-        { title: "¡EMBOSCADA DALEK!", description: "¡EXTERMINAR! Recibes un disparo de un Dalek. La TARDIS pierde 25 de integridad.", icon: "fa-solid fa-robot", effect: () => { currentHP -= calculateDamage(); triggerDamageEffect(); } },
-        { title: "¡REVERSANDO LA POLARIDAD (MAL)!", description: "¡Has movido la palanca equivocada! El Vórtice se vuelve inestable. ¡Las paradojas restantes se han barajado!", icon: "fa-solid fa-shuffle", effect: () => { shuffleRemainingDeck(); } },
-        { title: "¡LOS ÁNGELES TIENEN LA CABINA!", description: "Has parpadeado. Un Ángel Lloroso golpea la TARDIS. Pierdes 10 de integridad.", icon: "fa-solid fa-hand-paper", effect: () => { currentHP -= 10; triggerDamageEffect(); } },
-        { title: "¡UN JAMMIE DODGER!", description: "Encuentras una galleta en el bolsillo de tu abrigo. ¡Deliciosa! Restaura 20 de integridad.", icon: "fa-solid fa-cookie-bite", effect: () => {  let healing = 20; if (unlockedPerks.some(p => p.id === 'four_knocks')) healing += 15; currentHP = Math.min(maxHP, currentHP + healing);  } },
-        { title: "¡EL DOCTOR TIENE UN PLAN!", description: "De repente, todo tiene sentido. La próxima paradoja no dañará la TARDIS si fallas. ¡Geronimo!", icon: "fa-solid fa-lightbulb", effect: () => { grantImmunityForNextCard = true; } }
+        { title: "DALEK AMBUSH!", description: "A Dalek patrol spots you! You take a hit! TARDIS integrity drops by 25.", icon: "fa-solid fa-robot", effect: () => { currentHP -= calculateDamage(); triggerDamageEffect(); playSound('incorrect'); } },
+        { title: "MASTER'S INTERFERENCE!", description: "You hear drums... The Master has tampered with the timeline! The remaining paradoxes are shuffled!", icon: "fa-solid fa-shuffle", effect: () => { shuffleRemainingDeck(); } },
+        { title: "WEEPING ANGEL!", description: "You blinked! An Angel strikes the TARDIS exterior. Integrity drops by 10.", icon: "fa-solid fa-hand-paper", effect: () => { currentHP -= 10; triggerDamageEffect(); playSound('incorrect'); } },
+        { title: "FOUND A JAMMIE DODGER!", description: "You find a biscuit in your coat pocket. Delicious! Restores 20 integrity.", icon: "fa-solid fa-cookie-bite", effect: () => {  let healing = 20; if (unlockedPerks.some(p => p.id === 'double_doctor')) healing += 15; currentHP = Math.min(maxHP, currentHP + healing); playSound('correct'); } },
+        { title: "BRILLIANT IDEA!", description: "'Wait, I know!' A moment of clarity. The next paradox won't cause damage if you fail.", icon: "fa-solid fa-lightbulb", effect: () => { grantImmunityForNextCard = true; } }
     ];
 
-    // --- El resto del código es casi idéntico, solo ajustando los nombres de las variables y las claves de localStorage ---
-    
-    // --- DOM Elements ---
     const dom = {
         body: document.querySelector('body'), gameWrapper: document.getElementById('game-wrapper'), hpBar: document.getElementById('hp-bar'), cardCounter: document.getElementById('contador-cartas'), totalCardsEl: document.getElementById('total-cartas'), dungeonNameEl: document.getElementById('dungeon-name'), dungeonCounterEl: document.getElementById('dungeon-counter'), cardContainer: document.getElementById('card-container'), cardQuestion: document.getElementById('card-question'), cardAnswer: document.getElementById('card-answer'), flipBtn: document.getElementById('flip-btn'), correctBtn: document.getElementById('correct-btn'), incorrectBtn: document.getElementById('incorrect-btn'), perksDisplay: document.getElementById('perks-display'),
         modals: { reglas: document.getElementById('modal-reglas'), gameover: document.getElementById('modal-gameover'), cleared: document.getElementById('modal-dungeon-cleared'), event: document.getElementById('modal-event'), perks: document.getElementById('modal-perks') },
@@ -161,24 +229,23 @@
         ending: { screen: document.getElementById('epic-ending'), perksList: document.getElementById('final-perks-list'), restartBtn: document.getElementById('restart-from-end') }
     };
     
-    // --- Game State ---
     let maxHP = 100, currentHP, currentDeck = [], currentCardIndex, cardsClearedInRun, currentDungeonIndex = 0;
     let unlockedPerks = [], highestDungeonCleared = -1;
-    let eventInProgress = false, grantImmunityForNextCard = false, towelUsedThisDungeon = false; // "towel" es ahora "reverse_polarity"
+    let grantImmunityForNextCard = false, timeyWimeyUsedThisDungeon = false;
     let currentEvent = null;
 
-    // --- Core Functions ---
     function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
     function shuffleRemainingDeck() { const remaining = currentDeck.slice(currentCardIndex); shuffleArray(remaining); currentDeck = [...currentDeck.slice(0, currentCardIndex), ...remaining]; }
     
     function startDungeon(dungeonIndex) {
+        playSound('tardisStart');
         currentDungeonIndex = dungeonIndex;
-        localStorage.setItem('whoTriviaEpisodeIndex', currentDungeonIndex);
+        localStorage.setItem('whoTennantRunIndex', currentDungeonIndex);
         const dungeon = dungeons[dungeonIndex];
-        currentHP = maxHP; currentCardIndex = 0; cardsClearedInRun = 0; towelUsedThisDungeon = false;
+        currentHP = maxHP; currentCardIndex = 0; cardsClearedInRun = 0; timeyWimeyUsedThisDungeon = false;
         currentDeck = [...dungeon.cards]; shuffleArray(currentDeck);
         dom.dungeonNameEl.textContent = dungeon.name;
-        dom.dungeonCounterEl.textContent = `Episodio: ${dungeonIndex + 1} / ${dungeons.length}`;
+        dom.dungeonCounterEl.textContent = `Story Arc: ${dungeonIndex + 1} / ${dungeons.length}`;
         Object.values(dom.modals).forEach(m => m.classList.remove('active'));
         populateUnlockedPerks();
         if (unlockedPerks.some(p => p.id === 'quantum_lock')) { cardsClearedInRun = 1; }
@@ -188,41 +255,49 @@
     function loadCard() {
         if (currentCardIndex >= currentDeck.length) { dungeonCleared(); return; }
         const card = currentDeck[currentCardIndex];
-        dom.cardContainer.classList.remove('is-flipped', 'fade-in');
-        void dom.cardContainer.offsetWidth; dom.cardContainer.classList.add('fade-in');
-        let qHTML = `<p class="whovian-font mb-4 text-lg">${card.q}</p>`;
-        dom.cardQuestion.innerHTML = qHTML;
+        dom.cardContainer.classList.remove('is-flipped');
+        dom.cardQuestion.textContent = card.q;
         let aHTML = `<p class="whovian-font mb-4 text-amber-300 font-bold text-lg">${card.a}</p>`;
-        if (card.ad) { aHTML += `<p class="whovian-font text-sm text-gray-400 italic">${card.ad}</p>`; }
+        if (card.ad) { aHTML += `<p class="whovian-font text-sm text-gray-300 italic">${card.ad}</p>`; }
         dom.cardAnswer.innerHTML = aHTML;
         dom.flipBtn.style.display = 'flex'; dom.correctBtn.style.display = 'none'; dom.incorrectBtn.style.display = 'none';
     }
 
-    function handleFlip() { dom.cardContainer.classList.add('is-flipped'); dom.flipBtn.style.display = 'none'; dom.correctBtn.style.display = 'flex'; dom.incorrectBtn.style.display = 'flex'; }
+    function handleFlip() { 
+        playSound('sonicReveal');
+        dom.cardContainer.classList.add('is-flipped'); 
+        dom.flipBtn.style.display = 'none'; 
+        dom.correctBtn.style.display = 'flex'; 
+        dom.incorrectBtn.style.display = 'flex'; 
+    }
 
     function handleAnswer(isCorrect) {
         if (!isCorrect) {
-            if(grantImmunityForNextCard) { /* Sin daño, ¡el Doctor tenía un plan! */ }
-            else if (unlockedPerks.some(p => p.id === 'emotional_inhibitor') && Math.random() < 0.15) { /* Sin daño, el inhibidor funcionó */ } 
+            if (grantImmunityForNextCard) { /* No damage, brilliant! */ }
+            else if (unlockedPerks.some(p => p.id === 'psychic_paper') && Math.random() < 0.15) { playSound('correct'); } 
             else {
                 let damage = calculateDamage();
-                if (unlockedPerks.some(p => p.id === 'reverse_polarity') && !towelUsedThisDungeon && (currentHP - damage <= 0)) { currentHP = 1; towelUsedThisDungeon = true; } 
-                else { currentHP -= damage; }
-                triggerDamageEffect();
+                if (unlockedPerks.some(p => p.id === 'timey_wimey_loophole') && !timeyWimeyUsedThisDungeon && (currentHP - damage <= 0)) { 
+                    currentHP = 1; timeyWimeyUsedThisDungeon = true; playSound('correct');
+                } else { 
+                    currentHP -= damage; triggerDamageEffect(); playSound('incorrect');
+                }
             }
-        } else { cardsClearedInRun++; }
+        } else { 
+            cardsClearedInRun++; playSound('correct');
+        }
         grantImmunityForNextCard = false; if (currentHP < 0) currentHP = 0;
         updateUI();
         if (currentHP <= 0) { gameOver(); return; }
         currentCardIndex++;
-        if (Math.random() < 0.20) { triggerRandomEvent(); } else { loadNextCard(); }
+        if (Math.random() < 0.25 && currentCardIndex < currentDeck.length) { triggerRandomEvent(); } else { loadNextCard(); }
     }
     
-    function loadNextCard() { if (currentCardIndex >= currentDeck.length) { dungeonCleared(); } else { setTimeout(loadCard, 400); } }
+    function loadNextCard() { if (currentCardIndex >= currentDeck.length) { dungeonCleared(); } else { setTimeout(loadCard, 800); } }
 
     function dungeonCleared() {
         highestDungeonCleared = Math.max(highestDungeonCleared, currentDungeonIndex);
-        localStorage.setItem('whoTriviaHighestEpisode', highestDungeonCleared);
+        localStorage.setItem('whoTennantHighestRun', highestDungeonCleared);
         populateUnlockedPerks();
         const nextIndex = currentDungeonIndex + 1;
         if (nextIndex >= dungeons.length) { victory(); } 
@@ -242,7 +317,7 @@
         dom.ending.screen.style.display = 'flex';
     }
 
-    function gameOver() { dom.modalContent.finalScore.textContent = cardsClearedInRun; dom.modals.gameover.classList.add('active'); }
+    function gameOver() { playSound('gameOver'); dom.modalContent.finalScore.textContent = cardsClearedInRun; dom.modals.gameover.classList.add('active'); }
     
     function triggerRandomEvent() {
         currentEvent = terrifyingEvents[Math.floor(Math.random() * terrifyingEvents.length)];
@@ -254,33 +329,54 @@
         updateUI(); if (currentHP <= 0) { gameOver(); return; }
         loadNextCard();
     }
-    function populateUnlockedPerks() { unlockedPerks = []; for (let i = 0; i <= highestDungeonCleared; i++) { if (dungeons[i].perk) { unlockedPerks.push(dungeons[i].perk); } } updatePerksUI(); }
-    function calculateDamage() { let baseDamage = 25; if (unlockedPerks.some(p => p.id === 'jelly_baby')) { baseDamage -= 5; } return baseDamage; }
+    function populateUnlockedPerks() { 
+        unlockedPerks = []; 
+        for (let i = 0; i <= highestDungeonCleared; i++) { 
+            if (dungeons[i].perk) { unlockedPerks.push(dungeons[i].perk); } 
+        } 
+        updatePerksUI(); 
+    }
+    function calculateDamage() { 
+        let baseDamage = 25; 
+        if (unlockedPerks.some(p => p.id === 'new_companion_armor')) { baseDamage -= 5; } 
+        if (unlockedPerks.some(p => p.id === 'time_lord_victorious_hubris')) { return 0; } // The ultimate perk!
+        return baseDamage; 
+    }
 
     function triggerDamageEffect() { dom.body.classList.add('screen-shake'); setTimeout(() => dom.body.classList.remove('screen-shake'), 400); }
-    function updateUI() { const hpPercentage = (currentHP / maxHP) * 100; dom.hpBar.style.width = `${hpPercentage}%`; dom.cardCounter.textContent = cardsClearedInRun; dom.totalCardsEl.textContent = currentDeck.length; }
+    function updateUI() { 
+        const hpPercentage = (currentHP / maxHP) * 100; 
+        dom.hpBar.style.width = `${hpPercentage}%`; 
+        dom.cardCounter.textContent = cardsClearedInRun; 
+        dom.totalCardsEl.textContent = currentDeck.length; 
+    }
     function updatePerksUI() {
         dom.perksDisplay.innerHTML = '';
-        if (unlockedPerks.length === 0) { dom.perksDisplay.innerHTML = `<p class="text-gray-500 text-xs italic">VACÍO</p>`; } 
+        if (unlockedPerks.length === 0) { dom.perksDisplay.innerHTML = `<p class="text-gray-500 text-xs italic">BASIC</p>`; } 
         else { unlockedPerks.forEach(perk => { const perkIcon = document.createElement('i'); perkIcon.className = `${perk.icon} text-amber-400 text-lg`; perkIcon.title = `${perk.name}: ${perk.desc}`; dom.perksDisplay.appendChild(perkIcon); }); }
     }
     function showPerksModal() {
         dom.modalContent.perksList.innerHTML = '';
-        if (unlockedPerks.length === 0) { dom.modalContent.perksList.innerHTML = `<p>El destornillador sónico todavía no hace mucho. ¡Pero es guay!</p>`; }
+        if (unlockedPerks.length === 0) { dom.modalContent.perksList.innerHTML = `<p>The sonic screwdriver isn't doing much... yet! But it's cool.</p>`; }
         else { unlockedPerks.forEach(perk => { dom.modalContent.perksList.innerHTML += `<div class="flex items-center gap-4"><i class="${perk.icon} text-amber-400 text-2xl w-8 text-center"></i><div><p class="font-bold text-blue-300">${perk.name}</p><p class="text-xs text-gray-400">${perk.desc}</p></div></div>`; }); }
         dom.modals.perks.classList.add('active');
     }
 
     // --- Event Listeners ---
-    dom.flipBtn.addEventListener('click', handleFlip); dom.correctBtn.addEventListener('click', () => handleAnswer(true)); dom.incorrectBtn.addEventListener('click', () => handleAnswer(false));
-    dom.buttons.reglas.addEventListener('click', () => dom.modals.reglas.classList.add('active')); dom.buttons.cerrarReglas.addEventListener('click', () => dom.modals.reglas.classList.remove('active'));
-    dom.buttons.restart.addEventListener('click', () => startDungeon(currentDungeonIndex)); dom.buttons.nextDungeon.addEventListener('click', () => startDungeon(currentDungeonIndex + 1));
+    dom.flipBtn.addEventListener('click', handleFlip);
+    dom.correctBtn.addEventListener('click', () => handleAnswer(true));
+    dom.incorrectBtn.addEventListener('click', () => handleAnswer(false));
+    dom.buttons.reglas.addEventListener('click', () => dom.modals.reglas.classList.add('active'));
+    dom.buttons.cerrarReglas.addEventListener('click', () => dom.modals.reglas.classList.remove('active'));
+    dom.buttons.restart.addEventListener('click', () => startDungeon(currentDungeonIndex));
+    dom.buttons.nextDungeon.addEventListener('click', () => startDungeon(currentDungeonIndex + 1));
     dom.buttons.eventContinue.addEventListener('click', continueAfterEvent);
-    dom.buttons.perks.addEventListener('click', showPerksModal); dom.buttons.cerrarPerks.addEventListener('click', () => dom.modals.perks.classList.remove('active'));
-    dom.ending.restartBtn.onclick = () => { localStorage.removeItem('whoTriviaHighestEpisode'); localStorage.removeItem('whoTriviaEpisodeIndex'); window.location.reload(); };
+    dom.buttons.perks.addEventListener('click', showPerksModal);
+    dom.buttons.cerrarPerks.addEventListener('click', () => dom.modals.perks.classList.remove('active'));
+    dom.ending.restartBtn.onclick = () => { localStorage.removeItem('whoTennantHighestRun'); localStorage.removeItem('whoTennantRunIndex'); window.location.reload(); };
     
     document.getElementById('reset-btn').addEventListener('click', function() {
-        if (confirm("¿Estás seguro de que quieres regenerar? Perderás todo tu progreso y mejoras sónicas. ¡Es un reinicio completo!")) {
+        if (confirm("Are you sure you want to Regenerate? This will erase all your progress and sonic upgrades. It's a full reset!")) {
             localStorage.clear();
             location.reload();
         }
@@ -288,8 +384,10 @@
 
     // --- Initial Load ---
     document.addEventListener('DOMContentLoaded', () => {
-        const savedHighest = localStorage.getItem('whoTriviaHighestEpisode'); highestDungeonCleared = savedHighest ? parseInt(savedHighest, 10) : -1;
-        const savedDungeon = localStorage.getItem('whoTriviaEpisodeIndex'); const initialDungeon = savedDungeon ? parseInt(savedDungeon, 10) : 0;
+        const savedHighest = localStorage.getItem('whoTennantHighestRun'); 
+        highestDungeonCleared = savedHighest ? parseInt(savedHighest, 10) : -1;
+        const savedDungeon = localStorage.getItem('whoTennantRunIndex'); 
+        const initialDungeon = savedDungeon ? parseInt(savedDungeon, 10) : 0;
         startDungeon(initialDungeon);
     });
     </script>
