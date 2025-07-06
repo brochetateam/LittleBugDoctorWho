@@ -8,10 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        html {
-            height: 100%;
-            overflow: hidden;
-        }
         :root {
             --tardis-blue: #003B6F;
             --tardis-dark-blue: #002A4F;
@@ -37,7 +33,7 @@
             overflow: hidden;
         }
         body::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
             background-image: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.2) 0deg 1deg, transparent 1deg 60deg);
             animation: time-vortex 60s linear infinite;
             z-index: -1;
@@ -125,7 +121,7 @@
 <body class="whovian-font text-gray-200 h-screen flex flex-col">
     <!-- Game Content -->
     <div id="game-wrapper" class="flex flex-col h-full">
-        <header class="gallifreyan-border p-4 border-b-4">
+        <header class="gallifreyan-border p-2 sm:p-4 border-b-4">
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-2">
                 <div class="text-center md:text-left mb-4 md:mb-0">
                     <h1 class="text-lg md:text-xl text-white flex items-center justify-center md:justify-start gap-3">
@@ -142,7 +138,7 @@
             </div>
         </header>
 
-        <main class="flex-grow container mx-auto p-4 flex flex-col justify-center items-center">
+        <main class="flex-grow container mx-auto p-2 sm:p-4 flex flex-col justify-center items-center">
             <div id="card-question" class="text-center text-lg max-w-3xl mb-6 text-shadow-lg shadow-black"></div>
             <div id="card-container" class="card-container w-full max-w-xs h-96 mb-6">
                 <div id="card-inner" class="card-inner">
@@ -173,14 +169,14 @@
                 <div id="flip-container" class="flex justify-center w-full">
                     <button id="flip-btn" class="pixel-border-blue bg-blue-600 text-white px-6 py-3 transition-all btn-hover-blue w-56 flex items-center justify-center text-base"><i class="fa-solid fa-screwdriver mr-2"></i> REVEAL</button>
                 </div>
-                <div id="answer-buttons" class="hidden justify-center w-full gap-2 px-4 sm:gap-4 sm:px-0">
+                <div id="answer-buttons" class="hidden justify-center w-full gap-2 px-2 sm:gap-4 sm:px-0">
                     <button id="correct-btn" class="pixel-border bg-green-500 text-white px-4 py-2 transition-all btn-hover flex-1 sm:flex-none sm:w-48 sm:px-6 sm:py-3 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-check mr-2"></i> BRILLIANT!</button>
                     <button id="incorrect-btn" class="pixel-border-red bg-red-500 text-white px-4 py-2 transition-all btn-hover-red flex-1 sm:flex-none sm:w-48 sm:px-6 sm:py-3 flex items-center justify-center text-sm sm:text-base"><i class="fas fa-times mr-2"></i> SPOILERS!</button>
                 </div>
             </div>
         </main>
         
-        <footer class="gallifreyan-border p-4 border-t-4">
+        <footer class="gallifreyan-border p-2 sm:p-4 border-t-4">
              <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
                 <div class="flex items-center gap-4 mb-2 sm:mb-0 text-center">
                      <p class="whovian-font text-white text-sm"><span>SONIC UPGRADES:</span></p>
@@ -196,11 +192,11 @@
     </div>
 
     <!-- Modals -->
-    <div id="modal-reglas" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">COMPANION'S GUIDE</h2><div class="mb-4 text-white text-sm whovian-font"><p class="mb-2">1. Each card is a paradox. Solve it to stabilize the timeline.</p><p class="mb-2">2. Failure damages the TARDIS. Be honest, the universe doesn't do second chances.</p><p class="mb-2">3. If TARDIS integrity hits 0, you're lost to the Time Vortex. Game Over.</p><p class="mt-4 text-amber-300">4. Time is... wibbly-wobbly. Unexpected things can, and will, happen.</p></div><button id="cerrar-reglas" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">Got it!</button></div></div>
-    <div id="modal-gameover" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-red max-w-md w-full text-center"><h2 class="whovian-font text-4xl mb-4 text-red-500">EXTERMINATED!</h2><i class="fas fa-robot text-6xl text-gray-500 mb-4"></i><p class="whovian-font mb-2 text-white">THE PARADOX CONSUMED YOU.</p><p class="whovian-font mb-6 text-white">PARADOXES FIXED: <strong id="final-score" class="text-yellow-400">0</strong></p><button id="restart-run-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">RETRY STORY ARC</button></div></div>
-    <div id="modal-dungeon-cleared" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border bg-amber-800 max-w-md w-full text-center"><h2 class="whovian-font text-2xl mb-4 text-amber-300">STORY ARC COMPLETE</h2><i class="fas fa-door-open text-6xl text-gray-300 mb-4"></i><p class="whovian-font mb-2 text-white">You saved the day. The TARDIS repaired itself. Clever girl.</p><div id="new-perk-announcement" class="my-4 p-2 bg-blue-900 border-2 border-blue-500" style="display: none;"><p class="whovian-font text-sm text-white">SONIC SCREWDRIVER UPGRADED!</p><p id="new-perk-name" class="whovian-font text-blue-300"></p></div><p id="next-dungeon-lore" class="whovian-font mb-6 text-sm text-blue-200 italic"></p><button id="next-dungeon-btn" class="whovian-font pixel-border-blue bg-blue-500 text-white px-4 py-2 w-full">ALLONS-Y!</button></div></div>
-    <div id="modal-event" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full text-center"><h2 id="event-title" class="whovian-font text-2xl mb-4 text-blue-400">SOMETHING'S WRONG!</h2><i id="event-icon" class="text-6xl text-gray-300 mb-4"></i><p id="event-description" class="whovian-font mb-6 text-white"></p><button id="event-continue-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CONTINUE</button></div></div>
-    <div id="modal-perks" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">SONIC UPGRADES</h2><div id="perks-list-modal" class="mb-4 text-white text-sm whovian-font space-y-4"></div><button id="cerrar-perks" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CLOSE</button></div></div>
+    <div id="modal-reglas" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">COMPANION'S GUIDE</h2><div class="mb-4 text-white text-sm whovian-font"><p class="mb-2">1. Each card is a paradox. Solve it to stabilize the timeline.</p><p class="mb-2">2. Failure damages the TARDIS. Be honest, the universe doesn't do second chances.</p><p class="mb-2">3. If TARDIS integrity hits 0, you're lost to the Time Vortex. Game Over.</p><p class="mt-4 text-amber-300">4. Time is... wibbly-wobbly. Unexpected things can, and will, happen.</p></div><button id="cerrar-reglas" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">Got it!</button></div></div>
+    <div id="modal-gameover" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4"><div class="bg-gray-800 p-6 pixel-border-red max-w-md w-full text-center"><h2 class="whovian-font text-4xl mb-4 text-red-500">EXTERMINATED!</h2><i class="fas fa-robot text-6xl text-gray-500 mb-4"></i><p class="whovian-font mb-2 text-white">THE PARADOX CONSUMED YOU.</p><p class="whovian-font mb-6 text-white">PARADOXES FIXED: <strong id="final-score" class="text-yellow-400">0</strong></p><button id="restart-run-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">RETRY STORY ARC</button></div></div>
+    <div id="modal-dungeon-cleared" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4"><div class="bg-gray-800 p-6 pixel-border bg-amber-800 max-w-md w-full text-center"><h2 class="whovian-font text-2xl mb-4 text-amber-300">STORY ARC COMPLETE</h2><i class="fas fa-door-open text-6xl text-gray-300 mb-4"></i><p class="whovian-font mb-2 text-white">You saved the day. The TARDIS repaired itself. Clever girl.</p><div id="new-perk-announcement" class="my-4 p-2 bg-blue-900 border-2 border-blue-500" style="display: none;"><p class="whovian-font text-sm text-white">SONIC SCREWDRIVER UPGRADED!</p><p id="new-perk-name" class="whovian-font text-blue-300"></p></div><p id="next-dungeon-lore" class="whovian-font mb-6 text-sm text-blue-200 italic"></p><button id="next-dungeon-btn" class="whovian-font pixel-border-blue bg-blue-500 text-white px-4 py-2 w-full">ALLONS-Y!</button></div></div>
+    <div id="modal-event" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full text-center"><h2 id="event-title" class="whovian-font text-2xl mb-4 text-blue-400">SOMETHING'S WRONG!</h2><i id="event-icon" class="text-6xl text-gray-300 mb-4"></i><p id="event-description" class="whovian-font mb-6 text-white"></p><button id="event-continue-btn" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CONTINUE</button></div></div>
+    <div id="modal-perks" class="modal fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-2 sm:p-4"><div class="bg-gray-800 p-6 pixel-border-blue max-w-md w-full"><h2 class="whovian-font text-2xl mb-4 text-center text-blue-400">SONIC UPGRADES</h2><div id="perks-list-modal" class="mb-4 text-white text-sm whovian-font space-y-4"></div><button id="cerrar-perks" class="whovian-font pixel-border bg-green-500 text-white px-4 py-2 w-full">CLOSE</button></div></div>
     
     <div id="epic-ending" style="display: none;">
         <div class="credits-content whovian-font">
